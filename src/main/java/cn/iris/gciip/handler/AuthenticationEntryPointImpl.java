@@ -20,7 +20,7 @@ import java.io.IOException;
 public class AuthenticationEntryPointImpl implements AuthenticationEntryPoint {
     @Override
     public void commence(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException, ServletException {
-        RespResult<Object> result = new RespResult<Object>(HttpStatus.UNAUTHORIZED.value(), "用户认证失败，请重试！");
+        RespResult result = new RespResult(HttpStatus.UNAUTHORIZED.value(), "用户认证失败，请重试！");
         String json = JSON.toJSONString(result);
         // 处理异常
         WebUtil.renderString(httpServletResponse, json);

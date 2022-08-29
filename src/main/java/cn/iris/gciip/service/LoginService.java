@@ -12,11 +12,11 @@ public interface LoginService {
      * @param user 登录参数对象
      * @return 登录响应结果对象
      */
-    RespResult<Object> login(LoginParam user);
+    RespResult login(LoginParam user);
 
     /**
      * 退出登录
      * @return 退出结果
      */
-    RespResult<Object> logout();
+    RespResult logout();
 }

@@ -14,7 +14,7 @@ public class HelloController {
 
     @GetMapping("hello")
     @PreAuthorize("@authorityExp.hasAuthority('SuperAdmin')")
-    public RespResult<Object> hello() {
-        return new RespResult<>(200, "获取成功", "hello");
+    public RespResult hello() {
+        return new RespResult(200, "获取成功", "hello");
     }
 }

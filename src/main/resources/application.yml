@@ -3,6 +3,11 @@ server:
 spring:
   application:
     name: GCIIP
+  # 限制上传文件以及请求的大小
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 10MB
   datasource:
     name: defaultDS
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -56,3 +61,12 @@ image:
   plog: /gciip/image/plogs/
   good: /gciip/image/goods/
   errInfo: /gciip/image/errinfos/
+
+# 并发设置参数
+concurrent:
+  core-pool-size: 5
+  max-pool-size: 10
+  # 有界队列防止OOM
+  queue-size: 20
+  # 超出核心数线程的存活时间，单位: 秒
+  keep-alive-time: 60

@@ -3,6 +3,7 @@ package cn.iris.gciip.pojo;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.http.HttpStatus;
 
 /**
  * @author Iris 2022/8/6
@@ -10,7 +11,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class RespResult<T> {
+public class RespResult {
     /**
      * 状态码
      */
@@ -22,19 +23,45 @@ public class RespResult<T> {
     /**
      * 结果数据
      */
-    private T data;
+    private Object data;
+
+    public RespResult() {}
 
     public RespResult(Integer code, String msg) {
         this(code, msg, null);
     }
 
-    public RespResult(Integer code, T data) {
+    public RespResult(Integer code, Object data) {
         this(code, null, data);
     }
 
-    public RespResult(Integer code, String msg, T data) {
+    public RespResult(Integer code, String msg, Object data) {
         this.code = code;
         this.msg = msg;
         this.data = data;
+    }
+
+    public static RespResult success() {
+        return new RespResult(HttpStatus.OK.value(), "请求处理成功", null);
+    }
+
+    public static RespResult success(String msg) {
+        return new RespResult(HttpStatus.OK.value(), msg, null);
+    }
+
+    public static RespResult success(String msg, Object data) {
+        return new RespResult(HttpStatus.OK.value(), msg, data);
+    }
+
+    public static RespResult error() {
+        return new RespResult(HttpStatus.INTERNAL_SERVER_ERROR.value(), "请求处理失败", null);
+    }
+
+    public static RespResult error(String msg) {
+        return new RespResult(HttpStatus.INTERNAL_SERVER_ERROR.value(), msg, null);
+    }
+
+    public static RespResult error(String msg, Object data) {
+        return new RespResult(HttpStatus.INTERNAL_SERVER_ERROR.value(), msg, data);
     }
 }

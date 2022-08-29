@@ -24,7 +24,7 @@ public class LoginController {
      * @return 登录响应结果对象
      */
     @PostMapping("/login")
-    public RespResult<Object> login(LoginParam user) {
+    public RespResult login(LoginParam user) {
         return loginService.login(user);
     }
 
@@ -33,7 +33,7 @@ public class LoginController {
      * @return 退出结果
      */
     @RequestMapping("/logout")
-    public RespResult<Object> logout() {
+    public RespResult logout() {
         return loginService.logout();
     }
 }

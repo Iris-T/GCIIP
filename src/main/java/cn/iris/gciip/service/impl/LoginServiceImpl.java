@@ -35,7 +35,7 @@ public class LoginServiceImpl implements LoginService {
      * @return 登录响应结果对象
      */
     @Override
-    public RespResult<Object> login(LoginParam user) {
+    public RespResult login(LoginParam user) {
 
         // 将用户名密码封装成authentication用于验证
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword());
@@ -43,7 +43,7 @@ public class LoginServiceImpl implements LoginService {
         Authentication authenticate = authenticationManager.authenticate(authenticationToken);
         // 认证未通过
         if (Objects.isNull(authenticate)) {
-            return new RespResult<>(402, "登录失败");
+            return new RespResult(402, "登录失败");
         }
         // 认证通过，使用UserId生成JWT令牌,将Token放入RespResult中返回
         LoginUser loginUser = (LoginUser) authenticate.getPrincipal();
@@ -56,7 +56,7 @@ public class LoginServiceImpl implements LoginService {
         loginUser.getUser().setPassword(null);
         // 缓存数据保存7天
         redisCache.setCacheObject("user:"+id, loginUser, 7, TimeUnit.DAYS);
-        return new RespResult<>(200, "登录成功", hashMap);
+        return new RespResult(200, "登录成功", hashMap);
     }
 
     /**
@@ -64,13 +64,13 @@ public class LoginServiceImpl implements LoginService {
      * @return 退出结果
      */
     @Override
-    public RespResult<Object> logout() {
+    public RespResult logout() {
         // 获取SecurityContextHolder中的用户ID
         UsernamePasswordAuthenticationToken authentication = ((UsernamePasswordAuthenticationToken) SecurityContextHolder.getContext().getAuthentication());
         LoginUser loginUser = (LoginUser) authentication.getPrincipal();
         Long userId = loginUser.getUser().getId();
         // 删除Redis缓存
         redisCache.delObject( "user:" + userId);
-        return new RespResult<>(200, "注销成功");
+        return new RespResult(200, "注销成功");
     }
 }
