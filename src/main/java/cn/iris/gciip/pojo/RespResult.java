@@ -1,6 +1,7 @@
 package cn.iris.gciip.pojo;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.http.HttpStatus;
@@ -8,8 +9,8 @@ import org.springframework.http.HttpStatus;
 /**
  * @author Iris 2022/8/6
  */
-@Getter
-@Setter
+
+@Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class RespResult {
     /**
@@ -63,5 +64,13 @@ public class RespResult {
 
     public static RespResult error(String msg, Object data) {
         return new RespResult(HttpStatus.INTERNAL_SERVER_ERROR.value(), msg, data);
+    }
+
+    public static RespResult bad() {
+        return new RespResult(HttpStatus.BAD_REQUEST.value(), "错的请求方式，请重试", null);
+    }
+
+    public boolean isSuccess() {
+        return this.code == 200;
     }
 }

@@ -10,4 +10,18 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 public interface UserService extends IService<User> {
 
+    /**
+     * 验证用户验证邮箱是否已被注册
+     * @param email 用户邮箱
+     * @return 验证结果
+     */
+    public boolean isEmailHasRegistered(String email);
+
+    /**
+     * 验证用户名是否已被注册
+     * @param username 用户名
+     * @return 验证结果
+     */
+    public boolean isUsernameHasRegistered(String username);
+
 }

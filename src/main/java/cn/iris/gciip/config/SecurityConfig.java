@@ -24,7 +24,8 @@ import javax.annotation.Resource;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     static final String[] ACCESS_INTERFACES = {
-            "/user/login"
+            "/user/login",
+            "/user/register/**",
     };
 
     @Resource

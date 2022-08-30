@@ -1,5 +1,6 @@
 package cn.iris.gciip.pojo;
 
+import cn.iris.gciip.dto.RegisterParam;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
